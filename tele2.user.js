@@ -10,7 +10,7 @@
 // ==/UserScript==
 
 (function() {
-    document.addEventListener("keydown", (event) => {if (event.keyCode === 17) {
+    document.addEventListener("keydown", (event) => {if (event.keyCode === 18) {
         document.querySelector('div.media-viewer-buttons > button:nth-child(3)').classList.remove("hide")
         document.querySelector('div.media-viewer-buttons > button:nth-child(3)').click()
     }})
