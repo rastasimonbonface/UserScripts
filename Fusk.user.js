@@ -15,8 +15,8 @@
     const ureg = /(.*)\[(.*)\](.*)/
     const mmreg = /(\d*)\-(\d*)/
     const padreg = /(^0*)(?!$)/gm
+    const ident = /(.*)(\*\*\*)(.*)/
     const DO = () => {
-        console.log('do')
         let num = ''
         let url = wurl
         if(ureg.test(url)){
@@ -34,11 +34,15 @@
                 max = max.replace(padreg, '')
                 console.log('min: ' + min + ' max: ' + max)
                 let iurl = ''
-                for (i = min; i <= max; i++) {
+                for (let i = min; i <= max; i++) {
                     num = i + ''
                     num = num.padStart(pad, '0')
-
-                    iurl = purl[1] + num + purl[3]
+                    if(ident.test(purl[3])){
+                        let end = ident.exec(purl[3])
+                        iurl = purl[1]+ num + end[1] + num + end[3]
+                    }else{
+                        iurl = purl[1] + num + purl[3]
+                    }
                     html += /*html*/`
 <div class='iitem' style='max-width: 570px; display:inline-block; position:relative; margin: 4px'>
 <a href='${iurl}' target="_blank">
